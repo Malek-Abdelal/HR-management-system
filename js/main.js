@@ -61,7 +61,7 @@ Employee.prototype.render = function () {
 
     let div1 = document.createElement("div");
     div1.id = "info1";
-    div1.style = "width: 100%; display: flex; justify-content: space-between;"
+    div1.style = "width: 100%; display: flex; justify-content: space-around;"
     card.appendChild(div1);
 
     let span1 = document.createElement("span");
@@ -76,7 +76,7 @@ Employee.prototype.render = function () {
     
     let div2 = document.createElement("div");
     div2.id = "info2";
-    div2.style = "width: 100%; display: flex; justify-content: space-between;"
+    div2.style = "width: 100%; display: flex; justify-content: space-around;"
     card.appendChild(div2);
     
     let span3 = document.createElement("span");
