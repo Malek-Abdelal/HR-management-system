@@ -33,10 +33,8 @@ Employee.prototype.netSalary = function () {
 
 Employee.prototype.uniqueId = function (){
 
-    let dateString = Date.now().toString().substring(9);
-    let randomness = Math.trunc(Math.random()*100);
-
-    return (randomness + dateString).slice(0, 4) ;
+    let randomness = Math.trunc(Math.random()*100000000).toString().slice(0, 4) ;
+    return randomness ;
 
 }
 
