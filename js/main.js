@@ -58,11 +58,12 @@ Employee.prototype.render = function () {
         
         let cardsDiv = document.getElementById("employee-cards");
         
-        
         let card = document.createElement("div");
         card.id = "card";
         card.style = "height: 350px; width: 270px; background-color: #C9EEFF; border-radius: 5%; display: flex; flex-direction: column; padding: 15px; margin-top:3%; align-items: center; justify-content: space-around;  box-shadow: 0px 0px 5px #d1d5db"
-        cardsDiv.appendChild(card);
+        if(cardsDiv){ 
+            cardsDiv.appendChild(card);
+        }
         
         let img = document.createElement("img");
         img.id = "employee-img";
@@ -109,9 +110,11 @@ Employee.prototype.render = function () {
 
 
 let form1 = document.getElementById("form1");
-form1.addEventListener("submit", createNewEmployee);
+if(form1){                                                   // Check the reason and line 64
+    form1.addEventListener("submit", createNewEmployee);
+}
 
-console.log(form1);
+
 function createNewEmployee(event){
     
     event.preventDefault();
@@ -122,7 +125,30 @@ function createNewEmployee(event){
     
     let newEmployee = new Employee(userName, department, level, image); 
     
-    newEmployee.render();
+    newEmployee.render();            // every time we submit a form it will render it and re store the original array "employees again"
+    fillStorage(employees);
 }
 
+
+function fillStorage(data){
+
+    let fillStorageArr = JSON.stringify(data);
+    localStorage.setItem("employeesArr", fillStorageArr);
+}
+
+
+function pullStorage(){            // this function will excute only on load or refresh
+
+    let normalizedArr = JSON.parse(localStorage.getItem("employeesArr"));
+
+    if(normalizedArr !== null){               //this condition will be true only if there is an array in the storage
+        for (let i = employees.length; i < normalizedArr.length; i++) {           //will work only on refresh, so our original array of objects "employees" will be always empty, then it will start creat only the new objects. 
+            new Employee (normalizedArr[i].fullName, normalizedArr[i].department, normalizedArr[i].level, normalizedArr[i].imageURL);
+         }
+    }
 webShow();
+}
+
+pullStorage();
+ 
+  
