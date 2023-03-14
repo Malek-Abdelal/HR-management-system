@@ -27,14 +27,15 @@ Employee.prototype.salaryBeforTax = function (min = 0, max = 0) {
 
 Employee.prototype.netSalary = function () {
 
-    return (this.salaryBeforTax() * (92.5 / 100)).toFixed(3);
+    this.salary = parseFloat((this.salaryBeforTax() * (92.5 / 100)).toFixed(3));   // check practice !
+    return this.salary;
 }
 
 
 Employee.prototype.uniqueId = function (){
 
-    let randomness = Math.trunc(Math.random()*100000000).toString().slice(0, 4) ;
-    return randomness ;
+    this.employeeID = Math.trunc(Math.random()*100000000).toString().slice(0, 4) ;
+    return this.employeeID ;
 
 }
 
@@ -110,7 +111,7 @@ Employee.prototype.render = function () {
 
 
 let form1 = document.getElementById("form1");
-if(form1){                                                   // Check the reason and line 64
+if(form1){                                                   // Check the reason and line 65
     form1.addEventListener("submit", createNewEmployee);
 }
 
@@ -139,16 +140,18 @@ function fillStorage(data){
 
 function pullStorage(){            // this function will excute only on load or refresh
 
-    let normalizedArr = JSON.parse(localStorage.getItem("employeesArr"));
-
-    if(normalizedArr !== null){               //this condition will be true only if there is an array in the storage
-        for (let i = employees.length; i < normalizedArr.length; i++) {           //will work only on refresh, so our original array of objects "employees" will be always empty, then it will start creat only the new objects. 
+    
+    if(localStorage.employeesArr !== undefined){             
+        let normalizedArr = JSON.parse(localStorage.getItem("employeesArr"));
+        for (let i = employees.length; i < normalizedArr.length; i++) {           // will creat only the new objects. 
             new Employee (normalizedArr[i].fullName, normalizedArr[i].department, normalizedArr[i].level, normalizedArr[i].imageURL);
          }
     }
 webShow();
+
 }
 
+
+
+
 pullStorage();
- 
-  
