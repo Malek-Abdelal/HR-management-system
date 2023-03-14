@@ -27,14 +27,15 @@ Employee.prototype.salaryBeforTax = function (min = 0, max = 0) {
 
 Employee.prototype.netSalary = function () {
 
-    return (this.salaryBeforTax() * (92.5 / 100)).toFixed(3);
+    this.salary = parseFloat((this.salaryBeforTax() * (92.5 / 100)).toFixed(3));   // check practice !
+    return this.salary;
 }
 
 
 Employee.prototype.uniqueId = function (){
 
-    let randomness = Math.trunc(Math.random()*100000000).toString().slice(0, 4) ;
-    return randomness ;
+    this.employeeID = Math.trunc(Math.random()*100000000).toString().slice(0, 4) ;
+    return this.employeeID ;
 
 }
 
@@ -58,11 +59,12 @@ Employee.prototype.render = function () {
         
         let cardsDiv = document.getElementById("employee-cards");
         
-        
         let card = document.createElement("div");
         card.id = "card";
         card.style = "height: 350px; width: 270px; background-color: #C9EEFF; border-radius: 5%; display: flex; flex-direction: column; padding: 15px; margin-top:3%; align-items: center; justify-content: space-around;  box-shadow: 0px 0px 5px #d1d5db"
-        cardsDiv.appendChild(card);
+        if(cardsDiv){ 
+            cardsDiv.appendChild(card);
+        }
         
         let img = document.createElement("img");
         img.id = "employee-img";
@@ -109,9 +111,11 @@ Employee.prototype.render = function () {
 
 
 let form1 = document.getElementById("form1");
-form1.addEventListener("submit", createNewEmployee);
+if(form1){                                                   // Check the reason and line 65
+    form1.addEventListener("submit", createNewEmployee);
+}
 
-console.log(form1);
+
 function createNewEmployee(event){
     
     event.preventDefault();
@@ -122,7 +126,32 @@ function createNewEmployee(event){
     
     let newEmployee = new Employee(userName, department, level, image); 
     
-    newEmployee.render();
+    newEmployee.render();            // every time we submit a form it will render it and re store the original array "employees again"
+    fillStorage(employees);
 }
 
+
+function fillStorage(data){
+
+    let fillStorageArr = JSON.stringify(data);
+    localStorage.setItem("employeesArr", fillStorageArr);
+}
+
+
+function pullStorage(){            // this function will excute only on load or refresh
+
+    
+    if(localStorage.employeesArr !== undefined){             
+        let normalizedArr = JSON.parse(localStorage.getItem("employeesArr"));
+        for (let i = employees.length; i < normalizedArr.length; i++) {           // will creat only the new objects. 
+            new Employee (normalizedArr[i].fullName, normalizedArr[i].department, normalizedArr[i].level, normalizedArr[i].imageURL);
+         }
+    }
 webShow();
+
+}
+
+
+
+
+pullStorage();

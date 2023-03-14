@@ -1,0 +1,109 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+* {
+    text-align:center;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color:azure;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    background-color: #62CDFF;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    width: 100%;
+    box-shadow: 2px 2px 5px #e5e7eb;
+}
+
+header nav {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+header nav ul {
+    width: 35%;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 6%;
+}
+
+header li , #home a{
+    box-sizing: border-box;
+    padding: 1% 2%;
+    background-color: white;
+    color: black;
+    vertical-align: center;
+    border-radius: 40px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+header p {
+    margin-left: 8%;
+    width: 20%;
+    font-size: 21px;
+    color: rgb(49, 45, 45);
+    font-family: 'Tilt Warp', cursive;
+
+}
+
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #62CDFF;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+footer p {
+    width: 20%;
+    padding-left: 0;
+    font-size: 15px;
+    font-family: 'Tilt Warp', cursive;
+}
+
+footer div {
+    display: flex;
+    width: 50%;
+    justify-content: end;
+    gap: 5%;
+    padding-right: 10%;
+}
+
+footer div a {
+    color: black;
+    text-decoration: none;
+}
+
+
