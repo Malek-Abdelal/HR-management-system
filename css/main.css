@@ -42,7 +42,7 @@ header nav ul {
     margin-right: 6%;
 }
 
-header li {
+header li , #accounting a{
     box-sizing: border-box;
     padding: 1% 2%;
     background-color: white;
@@ -50,7 +50,9 @@ header li {
     vertical-align: center;
     border-radius: 40px;
     cursor: pointer;
+    text-decoration: none;
 }
+
 
 header p {
     margin-left: 8%;
